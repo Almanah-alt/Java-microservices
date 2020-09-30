@@ -1,12 +1,12 @@
 package com.example.finisheddeviceservice;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 @Data
@@ -17,7 +17,6 @@ public class FinishedDevices {
     private Long id;
     private LocalDate date;
     private Boolean isTaken;
-
     private Long deviceId;
     private String year;
     private String manufacturer;

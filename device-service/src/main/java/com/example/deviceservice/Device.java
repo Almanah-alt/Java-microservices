@@ -18,6 +18,3 @@ public class Device {
     private Status status;
 }
 
-enum Status{
-    Finished, Taken
-}

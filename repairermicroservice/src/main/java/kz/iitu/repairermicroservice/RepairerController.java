@@ -21,8 +21,8 @@ public class RepairerController {
         return repairerRepository.findByPhone(phone);
     }
 
-    @GetMapping("/byId")
-    public Repairer repById(@RequestParam Long id){
+    @GetMapping("/byId/{id}")
+    public Repairer repById(@PathVariable Long id){
         return repairerRepository.findById(id).get();
     }
 

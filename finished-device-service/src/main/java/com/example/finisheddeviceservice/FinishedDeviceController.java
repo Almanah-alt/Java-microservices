@@ -1,9 +1,8 @@
 package com.example.finisheddeviceservice;
 
-import com.example.finisheddeviceservice.service.DeviceService;
-import com.example.finisheddeviceservice.service.RepairerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -11,6 +10,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/finishedDevices")
 public class FinishedDeviceController {
+
+    @Autowired
+    private RestTemplate restTemplate;
 
     @Autowired
     private DeviceService deviceService;
@@ -25,6 +27,7 @@ public class FinishedDeviceController {
     public List<FinishedDevices> repairCenterList(){
         return finishedDeviceRepository.findAll();
     }
+
 
     @PostMapping("/{deviceId}/{repId}")
     public void endOfRepairing(@PathVariable Long deviceId, @PathVariable Long repId){

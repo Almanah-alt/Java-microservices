@@ -2,12 +2,14 @@ package kz.iitu.repairermicroservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 @SpringBootApplication
-public class RepairermicroserviceApplication {
+@EnableEurekaClient
+public class RepairServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(RepairermicroserviceApplication.class, args);
+        SpringApplication.run(RepairServiceApplication.class, args);
     }
 
 }

@@ -1,4 +1,4 @@
-package com.example.finisheddeviceservice;
+package kz.iitu.centerrepservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,8 +10,7 @@ import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @EnableEurekaClient
-public class FinishedDeviceServiceApplication {
-
+public class CenterRepServiceApplication {
     @Bean
     @LoadBalanced
     public RestTemplate getRestTemplate() {
@@ -19,7 +18,7 @@ public class FinishedDeviceServiceApplication {
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(FinishedDeviceServiceApplication.class, args);
+        SpringApplication.run(CenterRepServiceApplication.class, args);
     }
 
 }

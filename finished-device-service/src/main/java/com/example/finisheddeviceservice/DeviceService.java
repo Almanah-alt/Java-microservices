@@ -12,19 +12,19 @@ public class DeviceService {
 
     public Device getDevice(Long id) {
         return restTemplate.getForObject(
-                "http://localhost:8083/api/devices/" + id,
+                "http://device-service/api/device/" + id,
                 Device.class);
     }
 
     public void setStat(Long id) {
         restTemplate.getForObject(
-                "http://localhost:8083/api/devices/setStatus/" + id,
+                "http://device-service/api/device/setStatus/" + id,
                 Device.class);
     }
 
     public void setStatTaken(Long id) {
         restTemplate.getForObject(
-                "http://localhost:8083/api/devices/setStatusTaken/" + id,
+                "http://device-service/api/device/setStatusTaken/" + id,
                 Device.class);
     }
 }

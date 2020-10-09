@@ -35,12 +35,19 @@ public class RepairerController {
     }
 
     @GetMapping("/username/{name}")
-    public Repairer repByName(@PathVariable String username){
-        return repairerRepository.findByUsername(username);
+    public Repairer repByName(@PathVariable String name){
+        return repairerRepository.findByUsername(name);
     }
 
-    @PostMapping("")
-    public void newRepairer(@RequestBody Repairer repairer){
-        repairerRepository.save(repairer);
+    @PostMapping("/{username}/{password}/{name}/{phone}/{idOfRoom}/{price}")
+    public void newRepairer(@PathVariable String username, @PathVariable String password, @PathVariable String name, @PathVariable String phone, @PathVariable int idOfRoom, @PathVariable int price){
+        Repairer repairer = new Repairer();
+        repairer.setIdOfRoom(idOfRoom);
+        repairer.setName(name);
+        repairer.setPassword(password);
+        repairer.setPhone(phone);
+        repairer.setPrice(price);
+        repairer.setUsername(username);
+        repairerRepository.saveAndFlush(repairer);
     }
 }

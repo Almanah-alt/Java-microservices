@@ -27,5 +27,15 @@ public class FinishedDevices {
     private Status status;
     private String phone;
 
+    public Long getDeviceId() {
+        return deviceId;
+    }
 
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public void setTaken(Boolean taken) {
+        isTaken = taken;
+    }
 }

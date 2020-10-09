@@ -35,13 +35,19 @@ public class DeviceController {
          deviceRepository.save(device);
     }
 
-    @PostMapping("")
-    public Device newDevice(@RequestBody Device device){
-        if (device.getDeviceOwnerName().isEmpty() || device.getExplanation().isEmpty()){
+    @PostMapping("/{owner}/{phone}/{explanation}/{manuf}/{year}")
+    public void newDevice(@PathVariable String owner, @PathVariable String phone, @PathVariable String explanation, @PathVariable String manuf, @PathVariable String year){
+        if (owner.isEmpty() || phone.isEmpty() || explanation.isEmpty()){
             throw new RuntimeException("fields of device must be filled");
         }
+        Device device = new Device();
+        device.setDeviceOwnerName(owner);
+        device.setDeviceOwnerPhone(phone);
+        device.setExplanation(explanation);
+        device.setManufacturer(manuf);
+        device.setStatus(Status.New);
+        device.setYear(year);
         deviceRepository.save(device);
-        return device;
     }
 
 }

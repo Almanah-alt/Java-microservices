@@ -42,10 +42,11 @@ public class CenterRepCont {
 
     }
 
-    @PatchMapping("/{id}")
+    @PostMapping("/remove/{id}")
     public void removeRepFromCenter(@PathVariable Long id){
-        CenterRep centerRep = centerRepRepository.findByRepId(id);
+        CenterRep centerRep = centerRepRepository.findById(id).get();
         centerRepRepository.delete(centerRep);
+        System.out.println("deelleleele");
         centerRepRepository.save(centerRep);
 
 

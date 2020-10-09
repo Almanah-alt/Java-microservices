@@ -53,12 +53,13 @@ public class FinishedDeviceController {
 
     }
 
-    @PatchMapping("/{id}")
-    public void takeFinishedDevice(@PathVariable Long id){
-        FinishedDevices finishedDevices = finishedDeviceRepository.findByDeviceId(id);
+    @PostMapping("/{id}")
+    public void takeFinishedDevice(@PathVariable("id") Long id){
+        FinishedDevices finishedDevices = finishedDeviceRepository.findById(id).get();
        finishedDevices.setStatus(Status.Taken);
-       deviceService.setStatTaken(id);
-       finishedDeviceRepository.save(finishedDevices);
+       finishedDevices.setTaken(true);
+       deviceService.setStatTaken(finishedDevices.getDeviceId());
+       finishedDeviceRepository.saveAndFlush(finishedDevices);
 
 
     }

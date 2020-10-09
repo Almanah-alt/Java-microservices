@@ -16,5 +16,29 @@ public class Device {
     private String deviceOwnerName;
     @Enumerated(EnumType.STRING)
     private Status status;
+
+    public void setDeviceOwnerName(String deviceOwnerName) {
+        this.deviceOwnerName = deviceOwnerName;
+    }
+
+    public void setDeviceOwnerPhone(String deviceOwnerPhone) {
+        this.deviceOwnerPhone = deviceOwnerPhone;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
+    public void setExplanation(String explanation) {
+        this.explanation = explanation;
+    }
+
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
 }
 

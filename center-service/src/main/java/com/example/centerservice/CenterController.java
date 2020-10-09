@@ -14,22 +14,26 @@ public class CenterController {
 
     @GetMapping("")
     public List<Center> repairCenterList(){
+        System.out.println("hhhhhhhhhh");
         return centerRepository.findAll();
+
     }
 
     @GetMapping("/{id}")
     public Center repairCenterList(@PathVariable Long id){
         return centerRepository.findById(id).get();
+
     }
 
-
-
-    @PostMapping("")
-    public void newCenter(@RequestBody Center repairCenter){
-        if(repairCenter.getLocation() == null || repairCenter.getName() == null){
+    @PostMapping("/{name}/{location}")
+    public void newCenter(@PathVariable("name") String name, @PathVariable("location") String location){
+        if(name.isEmpty() || location.isEmpty()){
             throw new RuntimeException("all fields in repair center should be filled (location|name)");
         }
-        centerRepository.save(repairCenter);
+        Center center = new Center();
+        center.setName(name);
+        center.setLocation(location);
+        centerRepository.save(center);
     }
 
     @PatchMapping("/{id}/location")

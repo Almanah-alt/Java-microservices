@@ -35,21 +35,24 @@ public class FinishedDeviceController {
         Device device = deviceService.getDevice(deviceId);
         Repairer repairer = repairerService.getRepairer(repId);
         FinishedDevices finishedDevices = new FinishedDevices();
+        if (!repairer.getUsername().equals("No username")){
+            if (!device.getDeviceOwnerName().equals("Name not found")){
+                finishedDevices.setName(repairer.getName());
+                finishedDevices.setDate(date);
+                finishedDevices.setIsTaken(false);
+                finishedDevices.setDeviceId(device.getId());
+                finishedDevices.setYear(device.getYear());
+                finishedDevices.setPhone(repairer.getPhone());
+                finishedDevices.setDeviceOwnerName(device.getDeviceOwnerName());
+                finishedDevices.setDeviceOwnerPhone(device.getDeviceOwnerPhone());
+                finishedDevices.setExplanation(device.getExplanation());
+                finishedDevices.setManufacturer(device.getManufacturer());
+                finishedDevices.setStatus(Status.Finished);
+                finishedDeviceRepository.save(finishedDevices);
+                deviceService.setStat(deviceId);
+            }
+        }
 
-        finishedDevices.setName(repairer.getName());
-        finishedDevices.setDate(date);
-        finishedDevices.setIsTaken(false);
-        finishedDevices.setDeviceId(device.getId());
-        finishedDevices.setYear(device.getYear());
-        finishedDevices.setPhone(repairer.getPhone());
-        finishedDevices.setDeviceOwnerName(device.getDeviceOwnerName());
-        finishedDevices.setDeviceOwnerPhone(device.getDeviceOwnerPhone());
-        finishedDevices.setExplanation(device.getExplanation());
-        finishedDevices.setManufacturer(device.getManufacturer());
-        finishedDevices.setStatus(Status.Finished);
-        finishedDeviceRepository.save(finishedDevices);
-
-        deviceService.setStat(deviceId);
 
     }
 
@@ -57,7 +60,7 @@ public class FinishedDeviceController {
     public void takeFinishedDevice(@PathVariable("id") Long id){
         FinishedDevices finishedDevices = finishedDeviceRepository.findById(id).get();
        finishedDevices.setStatus(Status.Taken);
-       finishedDevices.setTaken(true);
+       finishedDevices.setIsTaken(true);
        deviceService.setStatTaken(finishedDevices.getDeviceId());
        finishedDeviceRepository.saveAndFlush(finishedDevices);
 

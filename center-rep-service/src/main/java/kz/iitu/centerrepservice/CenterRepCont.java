@@ -30,15 +30,20 @@ public class CenterRepCont {
         Repairer repairer = repairerService.getRepairer(repId);
         CenterRep centerRep = new CenterRep();
 
-        centerRep.setCenterLocation(center.getLocation());
-        centerRep.setCenterName(center.getName());
-        centerRep.setIdOfRoom(repairer.getIdOfRoom());
-        centerRep.setPhone(repairer.getPhone());
-        centerRep.setPrice(repairer.getPrice());
-        centerRep.setRepairerName(repairer.getName());
-        centerRep.setUsername(repairer.getUsername());
-        centerRep.setRepId(repId);
-        centerRepRepository.save(centerRep);
+        if (!repairer.getName().equals("No name")){
+            if (!center.getName().equals("No Name")) {
+                centerRep.setCenterLocation(center.getLocation());
+                centerRep.setCenterName(center.getName());
+                centerRep.setIdOfRoom(repairer.getIdOfRoom());
+                centerRep.setPhone(repairer.getPhone());
+                centerRep.setPrice(repairer.getPrice());
+                centerRep.setRepairerName(repairer.getName());
+                centerRep.setUsername(repairer.getUsername());
+                centerRep.setRepId(repId);
+                centerRepRepository.save(centerRep);
+            }
+        }
+
 
     }
 

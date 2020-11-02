@@ -1,5 +1,5 @@
 package com.example.finisheddeviceservice;
 
-enum Status{
+public enum Status{
   Finished, Taken, New
 }

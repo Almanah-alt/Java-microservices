@@ -1,6 +1,7 @@
 package com.example.finisheddeviceservice;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -11,7 +12,13 @@ public class RepairerService {
     @Autowired
     private RestTemplate restTemplate;
 
-    @HystrixCommand(fallbackMethod = "getFallbackMethodRepairer")
+    @HystrixCommand(fallbackMethod = "getFallbackMethodRepairer",
+            commandProperties = {
+                    @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "2000"),
+                    @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "5"),
+                    @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "60"),
+                    @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "3000"),
+            })
     public Repairer getRepairer(Long id) {
         return restTemplate.getForObject(
                 "http://repairer-service/api/repairer/byId/" + id,

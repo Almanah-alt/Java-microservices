@@ -24,40 +24,4 @@ public class CenterRep {
     private int price;
     private String phone;
     private Long repId;
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setCenterName(String centerName) {
-        this.centerName = centerName;
-    }
-
-    public void setCenterLocation(String centerLocation) {
-        this.centerLocation = centerLocation;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setRepairerName(String repairerName) {
-        this.repairerName = repairerName;
-    }
-
-    public void setIdOfRoom(int idOfRoom) {
-        this.idOfRoom = idOfRoom;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public void setRepId(Long repId) {
-        this.repId = repId;
-    }
 }

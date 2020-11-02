@@ -1,10 +1,8 @@
 package com.example.centerservice;
 
 import lombok.Data;
-import lombok.Getter;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Data

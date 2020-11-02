@@ -12,51 +12,5 @@ public class Repairer {
     private String phone;
     private String password;
 
-    public String getName() {
-        return name;
-    }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public int getIdOfRoom() {
-        return idOfRoom;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setIdOfRoom(int idOfRoom) {
-        this.idOfRoom = idOfRoom;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }

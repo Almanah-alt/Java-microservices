@@ -12,13 +12,14 @@ public class DeviceService {
     @Autowired
     private RestTemplate restTemplate;
 
-    @HystrixCommand(fallbackMethod = "getFallbackMethodDevice",
-            commandProperties = {
-                    @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "2000"),
-                    @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "5"),
-                    @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "60"),
-                    @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "3000"),
-            })
+    @HystrixCommand(
+                fallbackMethod = "getFallbackMethodDevice",
+                threadPoolKey = "getDevicePool",
+                threadPoolProperties = {
+                        @HystrixProperty(name="coreSize", value="100"),
+                        @HystrixProperty(name="maxQueueSize", value="50"),
+                }
+            )
     public Device getDevice(Long id) {
         return restTemplate.getForObject(
                 "http://device-service/api/device/" + id,
@@ -38,13 +39,14 @@ public class DeviceService {
         return device;
     }
 
-    @HystrixCommand(fallbackMethod = "getFallbackMethodSetStatus",
-            commandProperties = {
-                    @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "2000"),
-                    @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "5"),
-                    @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "60"),
-                    @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "3000"),
-            })
+    @HystrixCommand(
+                fallbackMethod = "getFallbackMethodSetStatus",
+                threadPoolKey = "setStatPool",
+                threadPoolProperties = {
+                        @HystrixProperty(name="coreSize", value="100"),
+                        @HystrixProperty(name="maxQueueSize", value="50"),
+                }
+            )
     public void setStat(Long id) {
         restTemplate.getForObject(
                 "http://device-service/api/device/setStatus/" + id,
@@ -55,13 +57,14 @@ public class DeviceService {
         System.out.println("Not found device with id = " + id);
     }
 
-    @HystrixCommand(fallbackMethod = "getFallbackMethodSetStatTaken",
-            commandProperties = {
-                    @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "2000"),
-                    @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "5"),
-                    @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "60"),
-                    @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "3000"),
-            })
+    @HystrixCommand(
+                fallbackMethod = "getFallbackMethodSetStatTaken",
+                threadPoolKey = "setStatTakenPool",
+                threadPoolProperties = {
+                        @HystrixProperty(name="coreSize", value="100"),
+                        @HystrixProperty(name="maxQueueSize", value="50"),
+                }
+            )
     public void setStatTaken(Long id) {
         restTemplate.getForObject(
                 "http://device-service/api/device/setStatusTaken/" + id,

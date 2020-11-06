@@ -1,5 +1,6 @@
 package com.example.finisheddeviceservice;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -23,11 +24,11 @@ public class FinishedDeviceController {
     @Autowired
     private FinishedDeviceRepository finishedDeviceRepository;
 
+    @HystrixCommand
     @GetMapping("")
     public List<FinishedDevices> repairCenterList(){
         return finishedDeviceRepository.findAll();
     }
-
 
     @PostMapping("/{deviceId}/{repId}")
     public void endOfRepairing(@PathVariable Long deviceId, @PathVariable Long repId){
@@ -55,6 +56,7 @@ public class FinishedDeviceController {
 
 
     }
+
 
     @PostMapping("/{id}")
     public void takeFinishedDevice(@PathVariable("id") Long id){

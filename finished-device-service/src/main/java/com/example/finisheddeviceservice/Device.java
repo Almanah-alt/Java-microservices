@@ -1,7 +1,6 @@
 package com.example.finisheddeviceservice;
 
-import com.sun.xml.internal.rngom.digested.DDefine;
-import lombok.Data;
+
 import lombok.Getter;
 import lombok.Setter;
 

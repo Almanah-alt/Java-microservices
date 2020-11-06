@@ -1,9 +1,9 @@
 package kz.iitu.centerrepservice;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -19,6 +19,7 @@ public class CenterRepCont {
     @Autowired
     private CenterRepRepository centerRepRepository;
 
+    @HystrixCommand
     @GetMapping("")
     public List<CenterRep> centerReps(){
         return centerRepRepository.findAll();

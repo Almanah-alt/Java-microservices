@@ -12,13 +12,14 @@ public class RepairerService {
     @Autowired
     private RestTemplate restTemplate;
 
-    @HystrixCommand(fallbackMethod = "getFallbackMethodRepairer",
-            commandProperties = {
-                    @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "2000"),
-                    @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "5"),
-                    @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "60"),
-                    @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "3000"),
-            })
+    @HystrixCommand(
+                fallbackMethod = "getFallbackMethodRepairer",
+                threadPoolKey = "getCenterRepairerPool",
+                threadPoolProperties = {
+                        @HystrixProperty(name="coreSize", value="100"),
+                        @HystrixProperty(name="maxQueueSize", value="50"),
+                }
+            )
     public Repairer getRepairer(Long id) {
         return restTemplate.getForObject(
                 "http://repairer-service/api/repairer/byId/" + id,

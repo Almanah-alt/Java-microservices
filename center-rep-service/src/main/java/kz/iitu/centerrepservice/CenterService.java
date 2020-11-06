@@ -12,13 +12,14 @@ public class CenterService {
     @Autowired
     private RestTemplate restTemplate;
 
-    @HystrixCommand(fallbackMethod = "getFallbackMethodCenter",
-                    commandProperties = {
-                        @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "2000"),
-                        @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "5"),
-                        @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "60"),
-                        @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "3000"),
-                    })
+    @HystrixCommand(
+                fallbackMethod = "getFallbackMethodCenter",
+                threadPoolKey = "getCenterPool",
+                threadPoolProperties = {
+                        @HystrixProperty(name="coreSize", value="100"),
+                        @HystrixProperty(name="maxQueueSize", value="50"),
+                }
+            )
     public Center getCenter(Long id) {
         return restTemplate.getForObject(
                 "http://center-service/api/center/" + id,

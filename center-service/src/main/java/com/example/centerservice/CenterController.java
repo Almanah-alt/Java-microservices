@@ -6,7 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/center")
+@RequestMapping(value = "/api/center",
+                method ={RequestMethod.POST, RequestMethod.GET} )
 public class CenterController {
 
     @Autowired

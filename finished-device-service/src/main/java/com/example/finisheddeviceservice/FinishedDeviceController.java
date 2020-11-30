@@ -30,6 +30,11 @@ public class FinishedDeviceController {
         return finishedDeviceRepository.findAll();
     }
 
+    @GetMapping("/{id}")
+    public FinishedDevices getFinishedDevice(@PathVariable("id") Long id){
+        return finishedDeviceRepository.findById(id).get();
+    }
+
     @PostMapping("/{deviceId}/{repId}")
     public void endOfRepairing(@PathVariable Long deviceId, @PathVariable Long repId){
         LocalDate date = LocalDate.now();

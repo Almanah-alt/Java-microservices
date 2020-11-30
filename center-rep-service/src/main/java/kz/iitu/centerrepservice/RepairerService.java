@@ -2,7 +2,12 @@ package kz.iitu.centerrepservice;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
+import com.netflix.ribbon.proxy.annotation.Http;
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -21,9 +26,17 @@ public class RepairerService {
                 }
             )
     public Repairer getRepairer(Long id) {
-        return restTemplate.getForObject(
-                "http://repairer-service/api/repairer/byId/" + id,
-                Repairer.class);
+        String apiCredentials = "rest-client:p@ssword";
+        String base64Credentials = new String(Base64.encodeBase64(apiCredentials.getBytes()));
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization", "Basic " + base64Credentials);
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+        return restTemplate.exchange(
+                "http://user-service/api/user/byId/" + id,
+                HttpMethod.GET,
+                entity,
+                Repairer.class).getBody();
     }
 
     public Repairer getFallbackMethodRepairer(Long id) {

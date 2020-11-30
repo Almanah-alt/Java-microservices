@@ -2,7 +2,11 @@ package com.example.finisheddeviceservice;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -21,9 +25,18 @@ public class DeviceService {
                 }
             )
     public Device getDevice(Long id) {
-        return restTemplate.getForObject(
+        String apiCredentials = "rest-client:p@ssword";
+        String base64Credentials = new String(Base64.encodeBase64(apiCredentials.getBytes()));
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization", "Basic " + base64Credentials);
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+
+        return restTemplate.exchange(
                 "http://device-service/api/device/" + id,
-                Device.class);
+                HttpMethod.GET,
+                entity,
+                Device.class).getBody();
     }
 
     public Device getFallbackMethodDevice(Long id) {

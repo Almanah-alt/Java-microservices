@@ -38,7 +38,7 @@ public class FinishedDeviceInfoService {
         HttpEntity<String> entity = new HttpEntity<>(headers);
 
 
-        return restTemplate.exchange("http://finished-device-service/api/finishedDevices" + id,
+        return restTemplate.exchange("http://finished-device-service/api/finishedDevices/" + id,
                 HttpMethod.GET, entity, FinishedDevices.class).getBody();
     }
 

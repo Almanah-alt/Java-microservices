@@ -3,6 +3,17 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Java-microservices.iml" filepath="$PROJECT_DIR$/.idea/Java-microservices.iml" />
+      <module fileurl="file://$PROJECT_DIR$/auth-service/auth-service.iml" filepath="$PROJECT_DIR$/auth-service/auth-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/center-rep-service/center-rep-service.iml" filepath="$PROJECT_DIR$/center-rep-service/center-rep-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/center-service/center-service.iml" filepath="$PROJECT_DIR$/center-service/center-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/device-request/device-request.iml" filepath="$PROJECT_DIR$/device-request/device-request.iml" />
+      <module fileurl="file://$PROJECT_DIR$/device-service/device-service.iml" filepath="$PROJECT_DIR$/device-service/device-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/finished-device-service/finished-device-service.iml" filepath="$PROJECT_DIR$/finished-device-service/finished-device-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/notify-service/notify-service.iml" filepath="$PROJECT_DIR$/notify-service/notify-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/reactjs/reactjs.iml" filepath="$PROJECT_DIR$/reactjs/reactjs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service-discovery/service-discovery.iml" filepath="$PROJECT_DIR$/service-discovery/service-discovery.iml" />
+      <module fileurl="file://$PROJECT_DIR$/user-service/user-service.iml" filepath="$PROJECT_DIR$/user-service/user-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zuul-server/zuul-server.iml" filepath="$PROJECT_DIR$/zuul-server/zuul-server.iml" />
     </modules>
   </component>
 </project>

@@ -17,7 +17,7 @@ public class DeviceController {
     }
 
     @GetMapping("/{id}")
-    public Device getDeviceById(@PathVariable("id") Long id) {
+    public Device getDeviceById(@PathVariable Long id) {
         return deviceRepository.findById(id).get();
     }
 

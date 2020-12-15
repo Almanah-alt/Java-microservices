@@ -1,6 +1,5 @@
 package com.example.zuulserver.security;
 
-import com.example.commonservice.security.JwtConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
@@ -14,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @EnableWebSecurity    // Enable security config. This annotation denotes config for spring security.
 public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
+
     @Autowired
     private JwtConfig jwtConfig;
 
@@ -36,24 +36,26 @@ public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
                 /* Request to User controller*/
 //
                 /* Request to User controller*/
-
-                .antMatchers(HttpMethod.GET,"/api/user/**").authenticated()
                 .antMatchers(HttpMethod.POST,"/api/user/signUp/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/user/username/**").hasAnyRole("ADMIN", "REPAIRER")
+                .antMatchers(HttpMethod.GET, "/api/user/username/**").hasAnyRole("ADMIN", "REPAIRER", "USER")
                 .antMatchers(HttpMethod.DELETE,"/api/user/**").hasAnyRole("ADMIN")
 
-                /* Request to Finished_Device controller*/
+                /* Request to Finished_Device controller */
 
                 .antMatchers(HttpMethod.GET,"/api/finishedDevices/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/finishedDevices/**").hasRole("REPAIRER")
                 .antMatchers(HttpMethod.POST, "/api/finishedDevices/{id}").hasRole("USER")
 
-                /* Request to Device controller*/
+                /* Request to Device controller */
 
                 .antMatchers(HttpMethod.GET,"/api/device/**").hasAnyRole("REPAIRER", "ADMIN")
                 .antMatchers(HttpMethod.POST, "/api/device/**").permitAll()
 
-                /* Request to Center controller*/
+                /* Request */
+
+                .antMatchers(HttpMethod.GET,"/finishedDevice/request/**").hasRole("REPAIRER")
+
+                /* Request to Center controller */
 
                 .antMatchers("/api/center/**").authenticated()
 

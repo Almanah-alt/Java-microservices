@@ -1,10 +1,7 @@
 package com.example.devicerequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/finishedDevice/request")
@@ -21,9 +18,9 @@ public class DeviceRequestController {
 
 
     // TODO Ideally there should POST request
-    @GetMapping
-    public String sendMessageToKafkaTopic2(@RequestParam("userId") String userId,
-                                           @RequestParam("finishedDeviceId") Long finishedDeviceId) {
+    @GetMapping("{userId}/{finishedDeviceId}")
+    public String sendMessageToKafkaTopic2(@PathVariable String userId,
+                                           @PathVariable Long finishedDeviceId){
 
         FinishedDeviceRequest finishedDeviceRequest = new FinishedDeviceRequest(userId, finishedDeviceInfoService.getFinishedDeviceById(finishedDeviceId));
         this.producer.finishedDeviceRequestNotify(finishedDeviceRequest);

@@ -1,0 +1,170 @@
+version: "3.1"
+services:
+  zookeeper:
+    image: wurstmeister/zookeeper
+    container_name: zookeeper
+    ports:
+      - "2181:2181"
+
+  kafka:
+    image: wurstmeister/kafka
+    container_name: kafka
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: localhost
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+
+
+  reactjs:
+    container_name: reactjs
+    image: reactimg
+    stdin_open: true
+    ports:
+      - "3000:3000"
+
+
+  service-discovery:
+    image: service-discovery
+    container_name: service-discovery
+    build:
+      context: ./service-discovery
+    ports:
+      - "8761:8761"
+
+
+  zuul-server:
+    image: zuul-server
+    container_name: zuul-server
+    build:
+      context: ./zuul-server
+    ports:
+      - '8762:8762'
+    depends_on:
+      - service-discovery
+    links:
+      - service-discovery:service-discovery
+
+  user-service:
+    image: user-service
+    container_name: user-service
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/remtech
+    build:
+      context: ./user-service
+    ports:
+      - "8081:8081"
+    depends_on:
+      - service-discovery
+    links:
+      - service-discovery:service-discovery
+
+
+  auth-service:
+    image: auth-service
+    container_name: auth-service
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/remtech
+    build:
+      context: ./auth-service
+    ports:
+      - "9100:9100"
+    depends_on:
+      - service-discovery
+    links:
+      - service-discovery:service-discovery
+
+  center-rep-service:
+    image: center-rep-service
+    container_name: center-rep-service
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/remtech
+    build:
+      context: ./center-rep-service
+    ports:
+      - "8085:8085"
+    depends_on:
+      - service-discovery
+    links:
+      - service-discovery:service-discovery
+
+  center-service:
+    image: center-service
+    container_name: center-service
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/remtech
+    build:
+      context: ./center-service
+    ports:
+      - "8082:8082"
+    depends_on:
+      - service-discovery
+    links:
+      - service-discovery:service-discovery
+
+  db:
+    image: postgres:13
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1
+      - POSTGRES_DB=remtech
+      - POSTGRES_HOST=localhost
+    volumes:
+      - database:/var/lib/postgresql/data
+
+  device-request:
+    image: device-request
+    container_name: device-request
+    build:
+      context: ./device-request
+    ports:
+      - "8087:8087"
+    depends_on:
+      - service-discovery
+    links:
+      - service-discovery:service-discovery
+
+  device-service:
+    image: device-service
+    container_name: device-service
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/remtech
+    build:
+      context: ./device-service
+    ports:
+      - "8089:8089"
+    depends_on:
+      - service-discovery
+    links:
+      - service-discovery:service-discovery
+
+  finished-device-service:
+    image: finished-device-service
+    container_name: finished-device-service
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/remtech
+    build:
+      context: ./finished-device-service
+    ports:
+      - "8084:8084"
+    depends_on:
+      - service-discovery
+    links:
+      - service-discovery:service-discovery
+
+  notify-service:
+    image: notify-service
+    container_name: notify-service
+    build:
+      context: ./notify-service
+    ports:
+      - "9000:9000"
+    depends_on:
+      - service-discovery
+    links:
+      - service-discovery:service-discovery
+volumes:
+  database:

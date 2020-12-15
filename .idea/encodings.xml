@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/auth-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/auth-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/center-rep-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/center-rep-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/center-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/center-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/device-request/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/device-request/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/device-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/device-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/finished-device-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/finished-device-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/notify-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/notify-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/service-discovery/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/user-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/user-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/zuul-server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/zuul-server/src/main/resources" charset="UTF-8" />
+  </component>
+</project>
